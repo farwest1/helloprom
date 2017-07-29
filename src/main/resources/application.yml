@@ -5,3 +5,8 @@ management:
   address: 0.0.0.0
   security:
     enabled: false
+endpoints:
+  metrics:
+    enabled: false
+  prometheus:
+    path: /metrics
