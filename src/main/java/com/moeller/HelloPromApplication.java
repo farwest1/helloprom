@@ -1,5 +1,7 @@
 package com.moeller;
 
+import io.prometheus.client.spring.boot.EnablePrometheusEndpoint;
+import io.prometheus.client.spring.boot.EnableSpringBootMetricsCollector;
 import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +16,8 @@ import org.springframework.context.annotation.Bean;
  */
 
 @SpringBootApplication
+@EnablePrometheusEndpoint
+@EnableSpringBootMetricsCollector
 public class HelloPromApplication {
 
   public static void main(String[] args) {

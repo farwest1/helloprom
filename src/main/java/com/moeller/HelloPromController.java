@@ -1,5 +1,6 @@
 package com.moeller;
 
+import io.prometheus.client.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 public class HelloPromController {
 
-  private final CounterService counterService;
+  private static final Counter requests = Counter.build().name("bernd_requests_cnt").help("Total requests").register();
   private static final Logger LOGGER = LoggerFactory.getLogger(HelloPromController.class);
-
-  @Autowired
-  public HelloPromController(CounterService counterService){
-    this.counterService=counterService;
-  }
 
 
 
   @RequestMapping("/")
   public String index() {
     LOGGER.debug("Basic Request called");
-    this.counterService.increment("services.api.index.invoked");
+    requests.inc();
     return "Greetings from Spring Boot!";
   }
 }
